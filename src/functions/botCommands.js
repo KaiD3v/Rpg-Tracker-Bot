@@ -5,8 +5,8 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
-  if(interaction.commandName === 'ping'){
-    interaction.reply('pong')
+  if (interaction.commandName === "ping") {
+    interaction.reply("pong");
   }
 });
 

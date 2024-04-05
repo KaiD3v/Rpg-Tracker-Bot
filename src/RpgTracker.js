@@ -4,8 +4,10 @@ import { commands } from "./functions/ComandList.js";
 import { TOKEN, CLIENT_ID } from "./private/Token.js";
 
 // bot commands
-import './functions/botCommands.js'
+import "./functions/botCommands.js";
 
+// apis
+import './api/dndApi.js'
 
 const rest = new REST({ version: "10" }).setToken(TOKEN);
 
