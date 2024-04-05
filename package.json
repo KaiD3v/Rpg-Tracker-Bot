@@ -1,0 +1,17 @@
+{
+  "name": "rpgtrackerbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/RpgTracker.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --watch ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.14.1"
+  }
+}
