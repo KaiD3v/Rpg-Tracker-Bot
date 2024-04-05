@@ -1,11 +1,7 @@
 import { REST, Routes } from "discord.js";
 import { Client, GatewayIntentBits } from "discord.js";
 import { actualHourAndDate as date } from "./models/DateNow.js";
-
-// registrando bot
-const TOKEN =
-  "MTIyNTY2NjQ3MjQ5MjI2OTU3MA.GkuYA8.I8uNeLoUiW3hetGtZdwC3ItvT6luZMbE5puqQQ";
-const CLIENT_ID = "1225666472492269570";
+import { TOKEN, CLIENT_ID } from "./private/Token.js";
 
 const commands = [
   {
