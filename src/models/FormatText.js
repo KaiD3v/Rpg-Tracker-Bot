@@ -1,5 +1,4 @@
 // format abilites texts
-
 export function formatAbilities(abilities) {
     let message = "Habilidades:\n";
     abilities.forEach(ability => {

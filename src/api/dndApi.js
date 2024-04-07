@@ -1,7 +1,5 @@
 import axios from "axios";
 
-export let abilities = [];
-
 // Chamada para a API principal
 axios.get("https://www.dnd5eapi.co/api")
   .then((res) => {
@@ -11,7 +9,11 @@ axios.get("https://www.dnd5eapi.co/api")
     console.log("Erro ao consumir a API principal:", err);
   });
 
-// Chamada para a API de habilidades
+// API de habilidades
+// abilites
+export let abilities = [];
+export let char = {}
+
 axios.get("https://www.dnd5eapi.co/api/ability-scores")
   .then((res) => {
     abilities = res.data.results.map((ability) => ({ 
@@ -23,6 +25,18 @@ axios.get("https://www.dnd5eapi.co/api/ability-scores")
   })
   .catch((err) => {
     console.log("Erro ao consumir a API de habilidades:", err);
+  });
+
+  // carisma
+  axios.get("https://www.dnd5eapi.co/api/ability-scores/cha")
+  .then((res) => {
+    char = {
+      name: res.data.full_name, desc: res.data.desc
+    } 
+    console.log("carisma:", char);
+  })
+  .catch((err) => {
+    console.log("Erro ao consumir a API principal:", err);
   });
 
 // Exportar a constante abilities
