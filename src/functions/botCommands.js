@@ -22,7 +22,7 @@ export const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isCommand()) return;
   // Responde ao comando "habilidades"
-  if (interaction.commandName === "a") {
+  if (interaction.commandName === "ping") {
     interaction.reply("pong");
   }
 
@@ -80,7 +80,7 @@ client.on("interactionCreate", async (interaction) => {
       });
   }
   // retornar dados da api
-  if (interaction.commandName === "ping") {
+  if (interaction.commandName === "notes") {
     try {
       const response = await axios.get("http://localhost:3000/notes");
       const notesData = response.data;
