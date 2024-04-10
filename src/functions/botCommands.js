@@ -48,15 +48,21 @@ client.on("interactionCreate", async (interaction) => {
 
     await interaction.showModal(modal);
 
-    interaction.awaitModalSubmit({time: 60_000})
-    .then((ModalSubmitInteraction) => {
-      const newNoteNameValue = ModalSubmitInteraction.fields.getTextInputValue('newNoteNameInput')
-      const newNoteValue = ModalSubmitInteraction.fields.getTextInputValue('newNoteInput')
+    interaction
+      .awaitModalSubmit({ time: 60_000 })
+      .then((ModalSubmitInteraction) => {
+        const newNoteNameValue =
+          ModalSubmitInteraction.fields.getTextInputValue("newNoteNameInput");
+        const newNoteValue =
+          ModalSubmitInteraction.fields.getTextInputValue("newNoteInput");
 
-      ModalSubmitInteraction.reply(`Sua nota é: ${newNoteNameValue} \n${newNoteValue}`)
-    }).catch(err => {
-      console.error('Erro ao enviar formulário:', err)
-    })
+        ModalSubmitInteraction.reply(
+          `Sua nota é: ${newNoteNameValue} \n${newNoteValue}`
+        );
+      })
+      .catch((err) => {
+        console.error("Erro ao enviar formulário:", err);
+      });
   }
 });
 
