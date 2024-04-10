@@ -8,6 +8,8 @@ import {
   TextInputBuilder,
   TextInputStyle,
   ModalBuilder,
+  InteractionType,
+  ModalSubmitInteraction,
 } from "discord.js";
 
 // api
@@ -28,16 +30,33 @@ client.on("interactionCreate", async (interaction) => {
       .setCustomId("NewNotes")
       .setTitle("Novas Notas");
 
+    const newNoteName = new TextInputBuilder()
+      .setCustomId("newNoteNameInput")
+      .setLabel("Digite sua nota aqui!")
+      .setMaxLength(100)
+      .setStyle(TextInputStyle.Short);
+
     const newNote = new TextInputBuilder()
       .setCustomId("newNoteInput")
       .setLabel("Digite sua nota aqui!")
       .setStyle(TextInputStyle.Paragraph);
 
-    const notesActionRow = new ActionRowBuilder().addComponents(newNote);
+    const noteNameActionRow = new ActionRowBuilder().addComponents(newNoteName);
+    const newNoteActionRow = new ActionRowBuilder().addComponents(newNote);
 
-    modal.addComponents(notesActionRow);
+    modal.addComponents(noteNameActionRow, newNoteActionRow);
 
     await interaction.showModal(modal);
+
+    interaction.awaitModalSubmit({time: 60_000})
+    .then((ModalSubmitInteraction) => {
+      const newNoteNameValue = ModalSubmitInteraction.fields.getTextInputValue('newNoteNameInput')
+      const newNoteValue = ModalSubmitInteraction.fields.getTextInputValue('newNoteInput')
+
+      ModalSubmitInteraction.reply(`Sua nota é: ${newNoteNameValue} \n${newNoteValue}`)
+    }).catch(err => {
+      console.error('Erro ao enviar formulário:', err)
+    })
   }
 });
 
