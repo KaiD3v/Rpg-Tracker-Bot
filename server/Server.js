@@ -1,14 +1,16 @@
 // No arquivo Server.js
 import { MongoClient } from "mongodb";
 import { CreateNote } from "./routes/notes/CreateNote.js";
+import { connectDb } from "./db/mongodb.js";
+import { GetNotes } from "./routes/notes/GetNotes.js";
+
 import fastify from "fastify";
 
-const uri = "mongodb://localhost:27017";
-export const client = new MongoClient(uri);
 const app = fastify();
 
 // Routes
 app.register(CreateNote);
+app.register(GetNotes)
 
 // Server
 const start = async () => {

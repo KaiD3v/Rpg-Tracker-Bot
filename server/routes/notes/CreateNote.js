@@ -1,14 +1,10 @@
 // No arquivo CreateNote.js
-import { client } from "../../Server.js";
+import { database } from "../../db/mongodb.js";
 
 export async function CreateNote(app) {
   app.post("/newnote", async (req, res) => {
     try {
-      // Conectar ao MongoDB
-      await client.connect();
-      const database = client.db("DiscordDb");
       const collection = database.collection("Notes");
-
       const { noteName, noteDesc } = req.body;
 
       const newNote = {
