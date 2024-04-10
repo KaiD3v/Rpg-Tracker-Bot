@@ -7,9 +7,6 @@ import { client } from "./functions/botCommands.js";
 // bot commands
 import "./functions/botCommands.js";
 
-// apis
-import "./api/dndApi.js";
-
 const rest = new REST({ version: "10" }).setToken(TOKEN);
 
 try {

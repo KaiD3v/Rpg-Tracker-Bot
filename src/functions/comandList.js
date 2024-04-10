@@ -4,7 +4,7 @@ export const commands = [
     description: "Reply with pong!",
   },
   {
-    name: "habilidades",
-    description: "Retorna a lista de habilidades"
+    name: "newnote",
+    description: "Realiza uma nova anotação."
   }
 ];
