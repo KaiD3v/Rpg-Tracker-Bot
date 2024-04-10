@@ -13,6 +13,7 @@ import {
 } from "discord.js";
 
 // api
+import axios from "axios";
 
 // models
 
@@ -50,15 +51,29 @@ client.on("interactionCreate", async (interaction) => {
 
     interaction
       .awaitModalSubmit({ time: 60_000 })
-      .then((ModalSubmitInteraction) => {
+      .then(async (modalSubmitInteraction) => {
         const newNoteNameValue =
-          ModalSubmitInteraction.fields.getTextInputValue("newNoteNameInput");
+          modalSubmitInteraction.fields.getTextInputValue("newNoteNameInput");
         const newNoteValue =
-          ModalSubmitInteraction.fields.getTextInputValue("newNoteInput");
+          modalSubmitInteraction.fields.getTextInputValue("newNoteInput");
 
-        ModalSubmitInteraction.reply(
-          `Sua nota é: ${newNoteNameValue} \n${newNoteValue}`
-        );
+        console.log(`Sua nota é: ${newNoteNameValue}\n${newNoteValue}`);
+
+        try {
+          const response = await axios.post("http://localhost:3000/newnote", {
+            noteName: newNoteNameValue,
+            noteDesc: newNoteValue,
+          });
+
+          console.log("Resposta do servidor:", response.data);
+        } catch (error) {
+          console.error("Erro ao enviar nota para o servidor:", error);
+        }
+
+        modalSubmitInteraction.reply({
+          content: "Sua nota foi enviada com sucesso!",
+          ephemeral: true, // Visível somente para o usuário que interagiu
+        });
       })
       .catch((err) => {
         console.error("Erro ao enviar formulário:", err);
