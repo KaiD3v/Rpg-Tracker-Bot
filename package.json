@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "node --watch ./server/Server.js",
-    "start": "nodemon --watch ."
+    "start": "node ./src/RpgTracker.js",
+    "serve": "nodemon ./server/Server.js"
   },
   "keywords": [],
   "author": "",

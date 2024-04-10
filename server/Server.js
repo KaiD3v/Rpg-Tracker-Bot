@@ -1,17 +1,24 @@
+// No arquivo Server.js
 import { MongoClient } from "mongodb";
+import { CreateNote } from "./routes/notes/CreateNote.js";
+import fastify from "fastify";
 
-// Replace the uri string with your connection string.
 const uri = "mongodb://localhost:27017";
+export const client = new MongoClient(uri);
+const app = fastify();
 
-const client = new MongoClient(uri);
+// Routes
+app.register(CreateNote);
 
-async function run() {
+// Server
+const start = async () => {
   try {
-    const database = client.db('DiscordDb');
-    const movies = database.collection('Notes');
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
+    await app.listen(3000);
+    console.log("Servidor rodando em: http://localhost:3000");
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
   }
-}
-run().catch(console.log('running on:', uri));
+};
+
+start();
