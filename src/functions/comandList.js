@@ -6,5 +6,9 @@ export const commands = [
   {
     name: "newnote",
     description: "Realiza uma nova anotação."
+  },
+  {
+    name: "notes",
+    description: "Retorna todas as notas criadas."
   }
 ];

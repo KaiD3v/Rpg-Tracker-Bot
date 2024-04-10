@@ -22,7 +22,7 @@ export const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isCommand()) return;
   // Responde ao comando "habilidades"
-  if (interaction.commandName === "ping") {
+  if (interaction.commandName === "a") {
     interaction.reply("pong");
   }
 
@@ -78,6 +78,31 @@ client.on("interactionCreate", async (interaction) => {
       .catch((err) => {
         console.error("Erro ao enviar formulário:", err);
       });
+  }
+  // retornar dados da api
+  if (interaction.commandName === "ping") {
+    try {
+      const response = await axios.get("http://localhost:3000/notes");
+      const notesData = response.data;
+
+      // Verifica se há notas disponíveis
+      if (notesData.length === 0) {
+        interaction.reply({ content: "Não há notas disponíveis." });
+        return;
+      }
+
+      // Constrói a string formatada com as informações das notas
+      let notesText = "## Notas abaixo:\n\n";
+      notesData.forEach((note) => {
+        notesText += `**${note.noteName}**\n *${note.noteDesc}*\n________________________________\n`;
+      });
+
+      // Responde ao Discord com as informações das notas em texto formatado
+      interaction.reply({ content: notesText });
+    } catch (error) {
+      console.error("Erro ao buscar notas:", error);
+      interaction.reply({ content: "Ocorreu um erro ao buscar as notas." });
+    }
   }
 });
 
